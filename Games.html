@@ -1,0 +1,973 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTERHOURS | Teen Arcade</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(-45deg,#080817,#241344,#101c38,#30134a,#080817);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {background-position:0% 50%}
+    50% {background-position:100% 50%}
+    100% {background-position:0% 50%}
+}
+
+header {
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #090919bb;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #ffffff20;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    color: #b99aff;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: #ddd;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 14px;
+}
+
+nav a:hover {color:#b99aff}
+
+.hero {
+    text-align: center;
+    padding: 75px 20px 50px;
+}
+
+.hero h1 {
+    font-size: clamp(38px,7vw,70px);
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: #b99aff;
+    text-shadow: 0 0 25px #9b6bff;
+}
+
+.hero p {
+    color: #ccc;
+    line-height: 1.7;
+}
+
+button {
+    border: none;
+    background: linear-gradient(135deg,#9b6bff,#6845db);
+    color: white;
+    padding: 12px 21px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px #9b6bff80;
+}
+
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #191927;
+    color: white;
+    outline: none;
+}
+
+section {
+    scroll-margin-top: 85px;
+}
+
+.dashboard {
+    padding: 25px 7%;
+}
+
+.section-title {
+    font-size: 25px;
+    margin-bottom: 22px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+    gap: 17px;
+}
+
+.stat-card {
+    background: #17172ae8;
+    border: 1px solid #ffffff25;
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.stat-card small {
+    color: #aaa;
+}
+
+.stat-card h2 {
+    margin-top: 12px;
+    font-size: 28px;
+    color: #c2a6ff;
+}
+
+.progress {
+    height: 9px;
+    background: #343044;
+    border-radius: 20px;
+    margin-top: 13px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#8d5cff,#e0a5ff);
+    transition: .4s;
+}
+
+.profile-edit {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.games {
+    padding: 35px 7% 60px;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #17172ae8;
+    border: 1px solid #ffffff25;
+    padding: 27px;
+    border-radius: 17px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    border-color: #b99aff;
+    box-shadow: 0 0 25px #9b6bff30;
+}
+
+.emoji {
+    font-size: 43px;
+    margin-bottom: 17px;
+}
+
+.card h3 {margin-bottom:10px}
+
+.card p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.play-area {
+    display: none;
+    text-align: center;
+    background: #101020ed;
+    margin: 0 7% 50px;
+    padding: 35px 20px;
+    border: 1px solid #a78bfa;
+    border-radius: 20px;
+}
+
+.play-area h2 {
+    color: #c4aaff;
+    margin-bottom: 20px;
+}
+
+.play-area p {
+    color: #ccc;
+    margin: 15px;
+}
+
+#reaction {
+    background: #a83245;
+    padding: 45px 15px;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#reaction.ready {background:#168b58}
+
+#memoryBoard {
+    display: grid;
+    grid-template-columns: repeat(4,65px);
+    justify-content: center;
+    gap: 10px;
+    margin: 25px;
+}
+
+.memory-card {
+    height: 65px;
+    padding: 0;
+    font-size: 25px;
+    background: #383052;
+}
+
+.quiz-option {
+    display: block;
+    min-width: 190px;
+    margin: 12px auto;
+}
+
+.leaderboard {
+    padding: 30px 7% 65px;
+}
+
+.leader-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px;
+    margin-bottom: 10px;
+    background: #191927;
+    border: 1px solid #ffffff20;
+    border-radius: 10px;
+}
+
+.badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    gap: 15px;
+}
+
+.badge-card {
+    text-align: center;
+    padding: 20px 10px;
+    background: #191927;
+    border: 1px solid #ffffff20;
+    border-radius: 14px;
+    opacity: .4;
+}
+
+.badge-card.unlocked {
+    opacity: 1;
+    border-color: #a78bfa;
+    box-shadow: 0 0 15px #a78bfa30;
+}
+
+.badge-card .emoji {font-size:32px}
+
+#toast {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    background: #25203b;
+    border: 1px solid #a78bfa;
+    border-radius: 12px;
+    padding: 16px 22px;
+    display: none;
+    z-index: 20;
+    box-shadow: 0 0 20px #9b6bff40;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #888;
+    border-top: 1px solid #ffffff20;
+}
+
+@media(max-width:600px) {
+    header {padding:17px 4%}
+    .logo {font-size:17px}
+    nav a {margin-left:8px;font-size:12px}
+    .dashboard,.games,.leaderboard {padding-left:5%;padding-right:5%}
+    .play-area {margin:0 5% 40px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">AFTERHOURS 🎮</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#profile">Profile</a>
+        <a href="#games">Games</a>
+        <a href="#achievements">Awards</a>
+        <a href="#leaderboard">Ranks</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>BORED? <span>NOT ANYMORE.</span></h1>
+    <p>Your personal arcade. Play, compete, collect XP and become a legend.</p>
+    <button onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
+        EXPLORE GAMES →
+    </button>
+</section>
+
+<!-- PLAYER PROFILE -->
+
+<section class="dashboard" id="profile">
+    <h2 class="section-title">👤 Your Player Dashboard</h2>
+
+    <div class="profile-grid">
+
+        <div class="stat-card">
+            <small>PLAYER</small>
+            <h2 id="playerName">Player</h2>
+        </div>
+
+        <div class="stat-card">
+            <small>⭐ TOTAL XP</small>
+            <h2 id="xp">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <small>🪙 COINS</small>
+            <h2 id="coins">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <small>🏆 LEVEL</small>
+            <h2 id="level">1</h2>
+        </div>
+
+    </div>
+
+    <div class="stat-card" style="margin-top:17px">
+        <small>LEVEL PROGRESS</small>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressText">0 / 100 XP to next level</p>
+    </div>
+
+    <div class="profile-edit">
+        <input id="nameInput" maxlength="18" placeholder="Enter your username">
+        <button onclick="changeName()">SAVE NAME</button>
+    </div>
+</section>
+
+<!-- GAMES -->
+
+<section class="games" id="games">
+    <h2 class="section-title">🔥 Choose Your Game</h2>
+
+    <div class="game-grid">
+
+        <div class="card">
+            <div class="emoji">⚡</div>
+            <h3>Reaction Rush</h3>
+            <p>Test your reflexes and reaction speed.</p>
+            <button onclick="startReaction()">PLAY NOW</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🧠</div>
+            <h3>Memory Match</h3>
+            <p>Find matching emojis and test your memory.</p>
+            <button onclick="startMemory()">PLAY NOW</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🔢</div>
+            <h3>Number Ninja</h3>
+            <p>Guess the secret number between 1 and 100.</p>
+            <button onclick="startGuess()">PLAY NOW</button>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🎯</div>
+            <h3>Quick Quiz</h3>
+            <p>Answer trivia questions and earn XP.</p>
+            <button onclick="startQuiz()">PLAY NOW</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- GAME AREA -->
+
+<section class="play-area" id="playArea">
+    <h2 id="gameTitle">Game</h2>
+    <div id="gameContent"></div>
+    <br>
+    <button onclick="closeGame()">← BACK TO GAMES</button>
+</section>
+
+<!-- ACHIEVEMENTS -->
+
+<section class="dashboard" id="achievements">
+    <h2 class="section-title">🏅 Achievements</h2>
+
+    <div class="badges">
+
+        <div class="badge-card" id="badge-first">
+            <div class="emoji">🎮</div>
+            <h3>First Game</h3>
+            <small>Play your first game</small>
+        </div>
+
+        <div class="badge-card" id="badge-brain">
+            <div class="emoji">🧠</div>
+            <h3>Brain Master</h3>
+            <small>Complete Memory Match</small>
+        </div>
+
+        <div class="badge-card" id="badge-quiz">
+            <div class="emoji">🎯</div>
+            <h3>Quiz Champion</h3>
+            <small>Score 5/5 in the quiz</small>
+        </div>
+
+        <div class="badge-card" id="badge-rich">
+            <div class="emoji">💰</div>
+            <h3>Coin Collector</h3>
+            <small>Collect 100 coins</small>
+        </div>
+
+        <div class="badge-card" id="badge-pro">
+            <div class="emoji">👑</div>
+            <h3>Arcade Legend</h3>
+            <small>Reach level 5</small>
+        </div>
+
+        <div class="badge-card" id="badge-fast">
+            <div class="emoji">⚡</div>
+            <h3>Speed Demon</h3>
+            <small>React in under 300 ms</small>
+        </div>
+
+    </div>
+</section>
+
+<!-- LEADERBOARD -->
+
+<section class="leaderboard" id="leaderboard">
+    <h2 class="section-title">🏆 Leaderboard</h2>
+    <div id="leaderboardList"></div>
+    <p style="color:#999;font-size:12px;margin-top:15px">
+        Local leaderboard: scores are stored in this browser.
+    </p>
+</section>
+
+<footer>
+    © 2026 AFTERHOURS | PLAY. COMPETE. REPEAT. ✨
+</footer>
+
+<div id="toast"></div>
+
+<script>
+
+// PLAYER DATA
+
+let player = JSON.parse(localStorage.getItem("afterhoursPlayer")) || {
+    name: "Player",
+    xp: 0,
+    coins: 0,
+    games: 0,
+    achievements: [],
+    memoryWins: 0,
+    perfectQuizzes: 0,
+    fastReactions: 0
+};
+
+let leaderboard = JSON.parse(
+    localStorage.getItem("afterhoursLeaderboard")
+) || [];
+
+function saveData() {
+    localStorage.setItem("afterhoursPlayer", JSON.stringify(player));
+    localStorage.setItem("afterhoursLeaderboard", JSON.stringify(leaderboard));
+}
+
+function updateDashboard() {
+    let level = Math.floor(player.xp / 100) + 1;
+    let progress = player.xp % 100;
+
+    document.getElementById("playerName").textContent = player.name;
+    document.getElementById("xp").textContent = player.xp;
+    document.getElementById("coins").textContent = player.coins;
+    document.getElementById("level").textContent = level;
+
+    document.getElementById("progressBar").style.width = progress + "%";
+
+    document.getElementById("progressText").textContent =
+        progress + " / 100 XP to next level";
+
+    document.querySelectorAll(".badge-card").forEach(card => {
+        card.classList.remove("unlocked");
+    });
+
+    player.achievements.forEach(id => {
+        let badge = document.getElementById("badge-" + id);
+        if (badge) badge.classList.add("unlocked");
+    });
+
+    renderLeaderboard();
+}
+
+function changeName() {
+    let name = document.getElementById("nameInput").value.trim();
+
+    if (!name) {
+        showToast("Please enter a username!");
+        return;
+    }
+
+    player.name = name;
+    document.getElementById("nameInput").value = "";
+
+    saveData();
+    updateDashboard();
+    showToast("Username updated!");
+}
+
+function showToast(message) {
+    let toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 2500);
+}
+
+// XP AND COINS
+
+function reward(xpAmount, coinAmount) {
+    let oldLevel = Math.floor(player.xp / 100) + 1;
+
+    player.xp += xpAmount;
+    player.coins += coinAmount;
+    player.games++;
+
+    checkAchievements();
+
+    let newLevel = Math.floor(player.xp / 100) + 1;
+
+    if (newLevel > oldLevel) {
+        showToast("🎉 LEVEL UP! You reached level " + newLevel);
+    } else {
+        showToast("+" + xpAmount + " XP  |  +" + coinAmount + " coins!");
+    }
+
+    saveData();
+    updateDashboard();
+}
+
+function unlock(id) {
+    if (!player.achievements.includes(id)) {
+        player.achievements.push(id);
+        showToast("🏅 Achievement unlocked!");
+    }
+}
+
+function checkAchievements() {
+    if (player.games >= 1) unlock("first");
+    if (player.memoryWins >= 1) unlock("brain");
+    if (player.perfectQuizzes >= 1) unlock("quiz");
+    if (player.coins >= 100) unlock("rich");
+    if (player.xp >= 400) unlock("pro");
+    if (player.fastReactions >= 1) unlock("fast");
+}
+
+// LEADERBOARD
+
+function renderLeaderboard() {
+    let list = document.getElementById("leaderboardList");
+
+    let entries = [...leaderboard];
+
+    let existing = entries.find(p => p.name === player.name);
+
+    if (existing) {
+        existing.xp = player.xp;
+    } else {
+        entries.push({
+            name: player.name,
+            xp: player.xp
+        });
+    }
+
+    entries.sort((a,b) => b.xp - a.xp);
+
+    list.innerHTML = "";
+
+    entries.slice(0,10).forEach((p,index) => {
+        let row = document.createElement("div");
+        row.className = "leader-row";
+
+        let name = document.createElement("span");
+        name.textContent = ["🥇","🥈","🥉"][index] || "#" + (index+1);
+        name.textContent += " " + p.name;
+
+        let score = document.createElement("strong");
+        score.textContent = p.xp + " XP";
+
+        row.appendChild(name);
+        row.appendChild(score);
+
+        list.appendChild(row);
+    });
+
+    leaderboard = entries.slice(0,50);
+    localStorage.setItem("afterhoursLeaderboard",JSON.stringify(leaderboard));
+}
+
+// GAME SYSTEM
+
+const area = document.getElementById("playArea");
+const title = document.getElementById("gameTitle");
+const content = document.getElementById("gameContent");
+
+function openGame(name) {
+    area.style.display = "block";
+    title.textContent = name;
+    content.innerHTML = "";
+    area.scrollIntoView({behavior:"smooth"});
+}
+
+let reactionTimer;
+let reactionReady = false;
+let reactionWaiting = false;
+let reactionStart;
+
+function closeGame() {
+    clearTimeout(reactionTimer);
+    reactionReady = false;
+    reactionWaiting = false;
+    area.style.display = "none";
+}
+
+// REACTION RUSH
+
+function startReaction() {
+    openGame("⚡ Reaction Rush");
+
+    content.innerHTML = `
+        <p>Click when the box turns GREEN!</p>
+        <div id="reaction">Press START to begin</div>
+        <button onclick="beginReaction()">START</button>
+        <p id="reactionResult"></p>
+    `;
+}
+
+function beginReaction() {
+    clearTimeout(reactionTimer);
+
+    reactionReady = false;
+    reactionWaiting = true;
+
+    let box = document.getElementById("reaction");
+    let result = document.getElementById("reactionResult");
+
+    box.classList.remove("ready");
+    box.textContent = "WAIT FOR GREEN...";
+    result.textContent = "";
+
+    reactionTimer = setTimeout(() => {
+        reactionReady = true;
+        reactionStart = performance.now();
+
+        box.classList.add("ready");
+        box.textContent = "CLICK NOW!";
+    },1500 + Math.random()*3000);
+
+    box.onclick = () => {
+        if (reactionReady) {
+            let time = Math.round(performance.now()-reactionStart);
+
+            reactionReady = false;
+            reactionWaiting = false;
+
+            box.textContent = "NICE!";
+            result.textContent = "Reaction time: " + time + " ms";
+
+            reward(20,10);
+
+            if (time < 300) {
+                player.fastReactions++;
+                checkAchievements();
+                saveData();
+                updateDashboard();
+            }
+
+        } else if (reactionWaiting) {
+            clearTimeout(reactionTimer);
+            reactionWaiting = false;
+            box.textContent = "TOO EARLY!";
+            result.textContent = "Wait for green next time!";
+        }
+    };
+}
+
+// MEMORY MATCH
+
+let memoryValues = [];
+let flipped = [];
+let matched = [];
+let memoryLocked = false;
+
+function startMemory() {
+    openGame("🧠 Memory Match");
+
+    memoryValues = [
+        "🍕","🍕","🚀","🚀",
+        "🐱","🐱","⚽","⚽",
+        "🎮","🎮","🍩","🍩",
+        "🌈","🌈","🔥","🔥"
+    ].sort(() => Math.random()-0.5);
+
+    flipped = [];
+    matched = [];
+    memoryLocked = false;
+
+    content.innerHTML = `
+        <p>Find all 8 matching pairs!</p>
+        <div id="memoryBoard"></div>
+        <p id="memoryResult">Good luck!</p>
+    `;
+
+    let board = document.getElementById("memoryBoard");
+
+    memoryValues.forEach((emoji,index) => {
+        let button = document.createElement("button");
+        button.className = "memory-card";
+        button.textContent = "?";
+        button.onclick = () => flipCard(index,button);
+        board.appendChild(button);
+    });
+}
+
+function flipCard(index,button) {
+    if (
+        memoryLocked ||
+        matched.includes(index) ||
+        flipped.some(item => item.index === index)
+    ) return;
+
+    button.textContent = memoryValues[index];
+    flipped.push({index,button});
+
+    if (flipped.length === 2) {
+        memoryLocked = true;
+
+        if (memoryValues[flipped[0].index] ===
+            memoryValues[flipped[1].index]) {
+
+            flipped.forEach(item => matched.push(item.index));
+
+            flipped = [];
+            memoryLocked = false;
+
+            if (matched.length === 16) {
+                document.getElementById("memoryResult").textContent =
+                    "🎉 YOU WON! ALL PAIRS MATCHED!";
+
+                player.memoryWins++;
+                reward(40,25);
+            }
+
+        } else {
+            setTimeout(() => {
+                flipped.forEach(item => item.button.textContent = "?");
+                flipped = [];
+                memoryLocked = false;
+            },800);
+        }
+    }
+}
+
+// NUMBER NINJA
+
+let secretNumber;
+let attempts;
+let guessFinished = false;
+
+function startGuess() {
+    openGame("🔢 Number Ninja");
+
+    secretNumber = Math.floor(Math.random()*100)+1;
+    attempts = 0;
+    guessFinished = false;
+
+    content.innerHTML = `
+        <p>Guess a number between 1 and 100.</p>
+        <input id="guessInput" type="number" min="1" max="100" placeholder="Guess">
+        <button onclick="checkGuess()">GUESS</button>
+        <p id="guessResult">Can you find the number?</p>
+        <button onclick="startGuess()">RESTART</button>
+    `;
+
+    document.getElementById("guessInput").addEventListener("keydown",e => {
+        if(e.key === "Enter") checkGuess();
+    });
+}
+
+function checkGuess() {
+    if (guessFinished) return;
+
+    let input = document.getElementById("guessInput");
+    let result = document.getElementById("guessResult");
+    let guess = Number(input.value);
+
+    if (!Number.isInteger(guess)||guess<1||guess>100) {
+        result.textContent = "Enter a number between 1 and 100!";
+        return;
+    }
+
+    attempts++;
+
+    if (guess === secretNumber) {
+        guessFinished = true;
+
+        result.textContent =
+            "🎉 CORRECT! You won in " + attempts + " attempts!";
+
+        reward(30,15);
+
+    } else if (guess < secretNumber) {
+        result.textContent = "📈 Too low! Try higher.";
+    } else {
+        result.textContent = "📉 Too high! Try lower.";
+    }
+
+    input.value = "";
+    input.focus();
+}
+
+// QUICK QUIZ
+
+const questions = [
+    {
+        q:"Which planet is known as the Red Planet?",
+        options:["Venus","Mars","Jupiter","Saturn"],
+        answer:1
+    },
+    {
+        q:"How many sides does a hexagon have?",
+        options:["5","6","7","8"],
+        answer:1
+    },
+    {
+        q:"Which language is used to style websites?",
+        options:["HTML","Python","CSS","C++"],
+        answer:2
+    },
+    {
+        q:"What is the largest ocean?",
+        options:["Atlantic","Indian","Arctic","Pacific"],
+        answer:3
+    },
+    {
+        q:"What is the chemical symbol for gold?",
+        options:["Ag","Au","Fe","Go"],
+        answer:1
+    }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+let quizFinished = false;
+
+function startQuiz() {
+    openGame("🎯 Quick Quiz");
+    quizIndex = 0;
+    quizScore = 0;
+    quizFinished = false;
+    showQuestion();
+}
+
+function showQuestion() {
+    if (quizIndex >= questions.length) {
+        quizFinished = true;
+
+        content.innerHTML = `
+            <h2>🎉 QUIZ COMPLETE!</h2>
+            <p>Your score: ${quizScore}/5</p>
+            <button onclick="startQuiz()">PLAY AGAIN</button>
+        `;
+
+        reward(quizScore*10,quizScore*5);
+
+        if (quizScore === 5) {
+            player.perfectQuizzes++;
+            checkAchievements();
+            saveData();
+            updateDashboard();
+        }
+
+        return;
+    }
+
+    let q = questions[quizIndex];
+
+    content.innerHTML = `
+        <p>Question ${quizIndex+1} of 5</p>
+        <h3>${q.q}</h3>
+    `;
+
+    q.options.forEach((option,index) => {
+        let button = document.createElement("button");
+        button.className = "quiz-option";
+        button.textContent = option;
+
+        button.onclick = () => {
+            if (quizFinished) return;
+
+            if(index === q.answer) quizScore++;
+
+            quizIndex++;
+            showQuestion();
+        };
+
+        content.appendChild(button);
+    });
+}
+
+// INITIALIZE
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
