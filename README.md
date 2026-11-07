@@ -1,2 +1,2 @@
 # AFTERHOURS
-I created AFTERHOURS – Teen Arcade as a fun space where teens can relax and enjoy games. I added four mini-games, along with XP, coins, achievements and a leaderboard. I also designed a moving neon background and a progress-saving feature to make the experience more enjoyable.
+I created AFTERHOURS – Teen Arcade because I wanted to build a fun space where teens could take a break, relax and enjoy playing games. I added four mini-games, along with XP, coins, achievements and a leaderboard to make playing more exciting and rewarding. I also worked on features like progress saving, a moving neon background and interactive elements to give the website its own personality. I wanted to make it feel like a mini arcade that people would genuinely enjoy exploring!
