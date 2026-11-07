@@ -9,4 +9,6 @@ I developed four mini-games and introduced features like XP, coins, achievements
 
 One of the most interesting parts was figuring out how to connect all these features and make them work together. This project helped me improve my coding, debugging and problem-solving skills while also teaching me how much planning and creativity goes into building a website.
 
-AFTERHOURS is more than just a gaming website for me. It represents an idea that I started from scratch, experimented with and gradually brought to life. I'm proud of how it turned out, and this project has motivated me to keep building, learning and exploring more possibilities in web development.
+AFTERHOURS is more than just a gaming website for me. It represents an idea that I started from scratch, experimented with and gradually brought to life. I feel good abt this website.
+
+## Hope you like it!! 
