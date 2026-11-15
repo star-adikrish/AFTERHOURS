@@ -4,242 +4,673 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFTERHOURS | Teen Arcade</title>
+<title>AFTERHOURS — Play Something</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--page:#f5f8fc;--surface:#fff;--soft:#edf4ff;--text:#17243a;--muted:#64748b;--line:#dce6f2;--blue:#2563eb;--blue-dark:#1d4ed8;--shadow:0 6px 20px rgba(30,64,120,.06)}
-html{scroll-behavior:smooth}
-body{min-height:100vh;font-family:Arial,sans-serif;color:var(--text);background:var(--page);line-height:1.5}
-header{padding:16px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
-.logo{font-size:21px;font-weight:800;color:var(--blue-dark);letter-spacing:1px;white-space:nowrap}
-nav{display:flex;flex-wrap:wrap;gap:18px}
-nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600}
-nav a:hover,nav a:focus-visible{color:var(--blue)}
-.hero{text-align:center;padding:72px 20px 58px;background:linear-gradient(180deg,#eaf2ff 0%,var(--page) 100%)}
-.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.1;margin-bottom:16px;letter-spacing:-1.5px}
-.hero h1 span{color:var(--blue)}
-.hero p{color:var(--muted);line-height:1.7;margin-bottom:22px}
-button{border:1px solid var(--blue);background:var(--blue);color:#fff;padding:11px 18px;border-radius:8px;font-weight:700;cursor:pointer;transition:background .15s ease}
-button:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
-button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
-input{padding:11px 12px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:var(--text);outline:none}
-input::placeholder{color:#94a3b8}
-section{scroll-margin-top:85px}
-.dashboard,.games,.leaderboard{padding:28px 7%}
-.section-title{font-size:23px;margin-bottom:18px;letter-spacing:-.3px}
-.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
-.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:19px;box-shadow:var(--shadow)}
-.stat-card small{color:var(--muted);font-weight:600}
-.stat-card h2{margin-top:7px;font-size:26px;color:var(--blue-dark)}
-.progress{height:8px;background:#e2e8f0;border-radius:20px;margin:12px 0 7px;overflow:hidden}
-.progress-bar{height:100%;width:0%;background:var(--blue);transition:width .25s ease}
-.profile-edit{margin-top:15px;display:flex;gap:9px;flex-wrap:wrap}
-.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px}
-.card{background:var(--surface);border:1px solid var(--line);padding:22px;border-radius:12px;box-shadow:var(--shadow)}
-.card:hover{border-color:#93c5fd}
-.emoji{font-size:34px;margin-bottom:12px}
-.card h3{margin-bottom:7px;font-size:18px}
-.card p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:17px}
-.play-area{display:none;text-align:center;background:var(--surface);margin:0 7% 35px;padding:28px 18px;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
-.play-area h2{color:var(--blue-dark);margin-bottom:14px}
-.play-area p{color:var(--muted);margin:12px}
-#reaction{background:#fee2e2;color:#991b1b;padding:40px 15px;max-width:400px;margin:18px auto;border-radius:10px;cursor:pointer;font-size:19px;font-weight:700}
-#reaction.ready{background:#dcfce7;color:#166534}
-#memoryBoard{display:grid;grid-template-columns:repeat(4,minmax(48px,62px));justify-content:center;gap:9px;margin:22px}
-.memory-card{height:62px;padding:0;font-size:23px;background:var(--soft);color:var(--blue-dark);border:1px solid #bfdbfe}
-.memory-card:hover{background:#dbeafe}
-.quiz-option{display:block;min-width:190px;margin:10px auto}
-.leader-row{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;margin-bottom:8px;background:var(--surface);border:1px solid var(--line);border-radius:9px}
-.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
-.badge-card{text-align:center;padding:17px 10px;background:var(--surface);border:1px solid var(--line);border-radius:11px;opacity:.55}
-.badge-card.unlocked{opacity:1;border-color:#93c5fd;background:#f0f6ff}
-.badge-card .emoji{font-size:28px}
-.badge-card small{color:var(--muted)}
-#toast{position:fixed;bottom:20px;right:20px;max-width:calc(100vw - 40px);background:#17243a;color:#fff;border-radius:9px;padding:13px 17px;display:none;z-index:20;box-shadow:var(--shadow)}
-footer{text-align:center;padding:22px;color:var(--muted);border-top:1px solid var(--line);background:var(--surface);font-size:13px}
-@media(max-width:650px){header{padding:14px 5%;align-items:flex-start;flex-direction:column;gap:10px}nav{gap:12px}nav a{font-size:13px}.hero{padding:54px 18px 42px}.dashboard,.games,.leaderboard{padding-left:5%;padding-right:5%}.play-area{margin:0 5% 30px}.section-title{font-size:21px}}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #20242c;
+    --muted: #78808e;
+    --green: #286b46;
+    --green-light: #e9f4ed;
+    --border: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.welcome-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 460px;
+    background: white;
+    padding: 42px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    font-size: 30px;
+}
+
+.brand span {
+    color: var(--green);
+}
+
+.welcome-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 29px;
+    margin: 35px 0 10px;
+}
+
+.subtitle {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.welcome-card input {
+    width: 100%;
+    padding: 14px;
+    margin: 25px 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+}
+
+.welcome-card input:focus {
+    border-color: var(--green);
+}
+
+.primary-btn {
+    background: var(--green);
+    color: white;
+    padding: 13px 20px;
+    border-radius: 9px;
+    font-weight: 700;
+    transition: background .2s, transform .2s;
+}
+
+.primary-btn:hover {
+    background: #1f5739;
+    transform: translateY(-1px);
+}
+
+.welcome-card .primary-btn {
+    width: 100%;
+}
+
+.error {
+    color: #c0392b;
+    font-size: 13px;
+    margin-top: 10px;
+    min-height: 18px;
+}
+
+/* MAIN APP */
+
+#arcadeApp {
+    display: none;
+}
+
+header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 17px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.header-brand span {
+    color: var(--green);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.small-btn {
+    background: var(--green-light);
+    color: var(--green);
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: 35px auto;
+}
+
+.welcome-heading {
+    margin-bottom: 28px;
+}
+
+.welcome-heading h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(27px, 4vw, 38px);
+    letter-spacing: -1.5px;
+}
+
+.welcome-heading p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.stat-card p {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.stat-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 29px;
+    margin-top: 9px;
+}
+
+.progress-track {
+    background: #edf0ed;
+    height: 7px;
+    border-radius: 20px;
+    margin-top: 12px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: var(--green);
+    height: 100%;
+    width: 0%;
+    transition: width .3s;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.section-heading h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 23px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+}
+
+.game-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 25px;
+    transition: transform .2s, border-color .2s;
+}
+
+.game-card:hover {
+    transform: translateY(-3px);
+    border-color: #b7cbbd;
+}
+
+.game-number {
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.game-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 21px;
+    margin: 12px 0 7px;
+}
+
+.game-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 43px;
+}
+
+.game-card button {
+    margin-top: 20px;
+}
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px;
+    margin-top: 30px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 23px;
+}
+
+.panel h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    margin-bottom: 17px;
+}
+
+.achievement {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.achievement:last-child {
+    border-bottom: none;
+}
+
+.achievement small {
+    color: var(--muted);
+}
+
+.leader-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.leader-row:last-child {
+    border: none;
+}
+
+/* GAME MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(25, 30, 28, .45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 28px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 17px;
+    background: #f0f1f2;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.modal-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 25px;
+    margin-bottom: 9px;
+    padding-right: 35px;
+}
+
+.game-info {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+}
+
+.game-area {
+    text-align: center;
+    padding: 18px 0;
+}
+
+.game-area input {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    margin: 12px 0;
+    outline: none;
+}
+
+.game-area input:focus {
+    border-color: var(--green);
+}
+
+.game-area button {
+    margin: 5px;
+}
+
+.game-message {
+    margin-top: 18px;
+    color: var(--green);
+    font-weight: 600;
+    min-height: 24px;
+    font-size: 14px;
+}
+
+.reaction-box {
+    background: #f1f3f2;
+    border-radius: 12px;
+    min-height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: 700;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.memory-card {
+    background: #edf1ee;
+    color: var(--text);
+    border-radius: 9px;
+    height: 65px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.memory-card.flipped,
+.memory-card.matched {
+    background: var(--green-light);
+    color: var(--green);
+}
+
+.memory-card.matched {
+    opacity: .65;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    background: #f2f4f3;
+    border-radius: 8px;
+    margin: 8px 0;
+    text-align: left;
+}
+
+.quiz-option:hover {
+    background: var(--green-light);
+}
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 30px 15px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #20242c;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 9px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: .25s;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media(max-width: 750px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .games-grid, .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 15px 5%;
+    }
+
+    .container {
+        width: 92%;
+    }
+}
+
+@media(max-width: 420px) {
+    .welcome-card {
+        padding: 28px 20px;
+    }
+
+    .header-brand {
+        font-size: 20px;
+    }
+
+    .profile-name {
+        display: none;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- USERNAME PAGE -->
+
+<section class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-card">
+        <div class="brand">AFTER<span>HOURS</span></div>
+        <h2>BORED? NOT ANYMORE.</h2>
+        <p class="subtitle">Your personal arcade. Play games, earn rewards and beat your high scores.</p>
+
+        <input id="welcomeName" type="text" maxlength="18"
+            placeholder="Choose a username">
+
+        <button class="primary-btn" onclick="enterArcade()">ENTER ARCADE</button>
+        <p class="error" id="welcomeError"></p>
+    </div>
+</section>
+
+<!-- MAIN ARCADE -->
+
+<div id="arcadeApp">
+
 <header>
-    <div class="logo">AFTERHOURS 🎮</div>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#profile">Profile</a>
-        <a href="#games">Games</a>
-        <a href="#achievements">Awards</a>
-        <a href="#leaderboard">Ranks</a>
-    </nav>
+    <div class="header-brand">AFTER<span>HOURS</span></div>
+    <div class="header-right">
+        <span class="profile-name" id="headerName">Player</span>
+        <button class="small-btn" onclick="changeName()">EDIT NAME</button>
+    </div>
 </header>
 
-<section class="hero" id="home">
-    <h1>BORED? <span>NOT ANYMORE.</span></h1>
-    <p>Your personal arcade. Play, compete, collect XP and become a legend.</p>
-    <button onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
-        EXPLORE GAMES →
-    </button>
-</section>
+<main class="container">
 
-<!-- PLAYER PROFILE -->
-
-<section class="dashboard" id="profile">
-    <h2 class="section-title">👤 Your Player Dashboard</h2>
-
-    <div class="profile-grid">
-
-        <div class="stat-card">
-            <small>PLAYER</small>
-            <h2 id="playerName">Player</h2>
-        </div>
-
-        <div class="stat-card">
-            <small>⭐ TOTAL XP</small>
-            <h2 id="xp">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <small>🪙 COINS</small>
-            <h2 id="coins">0</h2>
-        </div>
-
-        <div class="stat-card">
-            <small>🏆 LEVEL</small>
-            <h2 id="level">1</h2>
-        </div>
-
+    <div class="welcome-heading">
+        <h1 id="greeting">Welcome back.</h1>
+        <p>Your next high score is waiting.</p>
     </div>
 
-    <div class="stat-card" style="margin-top:17px">
-        <small>LEVEL PROGRESS</small>
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
+    <section class="stats">
+        <div class="stat-card">
+            <p>Total XP</p>
+            <h2 id="xpValue">0</h2>
         </div>
-        <p id="progressText">0 / 100 XP to next level</p>
+
+        <div class="stat-card">
+            <p>Coins</p>
+            <h2 id="coinValue">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Level</p>
+            <h2 id="levelValue">1</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Games Played</p>
+            <h2 id="gamesValue">0</h2>
+            <div class="progress-track">
+                <div class="progress-fill" id="levelProgress"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-heading">
+        <h2>Choose your game</h2>
+        <p>Four ways to play.</p>
     </div>
 
-    <div class="profile-edit">
-        <input id="nameInput" maxlength="18" placeholder="Enter your username">
-        <button onclick="changeName()">SAVE NAME</button>
-    </div>
-</section>
+    <section class="games-grid">
 
-<!-- GAMES -->
-
-<section class="games" id="games">
-    <h2 class="section-title">🔥 Choose Your Game</h2>
-
-    <div class="game-grid">
-
-        <div class="card">
-            <div class="emoji">⚡</div>
+        <div class="game-card">
+            <span class="game-number">GAME 01</span>
             <h3>Reaction Rush</h3>
-            <p>Test your reflexes and reaction speed.</p>
-            <button onclick="startReaction()">PLAY NOW</button>
+            <p>Test your reflexes. Wait for the signal and react as quickly as possible.</p>
+            <button class="primary-btn" onclick="openGame('reaction')">PLAY NOW</button>
         </div>
 
-        <div class="card">
-            <div class="emoji">🧠</div>
+        <div class="game-card">
+            <span class="game-number">GAME 02</span>
             <h3>Memory Match</h3>
-            <p>Find matching emojis and test your memory.</p>
-            <button onclick="startMemory()">PLAY NOW</button>
+            <p>Remember the positions and match all the pairs in the fewest moves.</p>
+            <button class="primary-btn" onclick="openGame('memory')">PLAY NOW</button>
         </div>
 
-        <div class="card">
-            <div class="emoji">🔢</div>
+        <div class="game-card">
+            <span class="game-number">GAME 03</span>
             <h3>Number Ninja</h3>
-            <p>Guess the secret number between 1 and 100.</p>
-            <button onclick="startGuess()">PLAY NOW</button>
+            <p>Find the hidden number between 1 and 100. Can you guess it?</p>
+            <button class="primary-btn" onclick="openGame('number')">PLAY NOW</button>
         </div>
 
-        <div class="card">
-            <div class="emoji">🎯</div>
+        <div class="game-card">
+            <span class="game-number">GAME 04</span>
             <h3>Quick Quiz</h3>
-            <p>Answer trivia questions and earn XP.</p>
-            <button onclick="startQuiz()">PLAY NOW</button>
+            <p>Five questions. One attempt. See how much you really know.</p>
+            <button class="primary-btn" onclick="openGame('quiz')">PLAY NOW</button>
         </div>
 
+    </section>
+
+    <section class="bottom-grid">
+
+        <div class="panel">
+            <h2>Achievements</h2>
+            <div id="achievementList"></div>
+        </div>
+
+        <div class="panel">
+            <h2>Leaderboard</h2>
+            <div id="leaderboard"></div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>AFTERHOURS — Made for the love of playing.</footer>
+
+</div>
+
+<!-- GAME WINDOW -->
+
+<div class="modal" id="gameModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeGame()">X</button>
+        <h2 id="gameTitle">Game</h2>
+        <p class="game-info" id="gameInfo"></p>
+        <div class="game-area" id="gameArea"></div>
     </div>
-</section>
+</div>
 
-<!-- GAME AREA -->
-
-<section class="play-area" id="playArea">
-    <h2 id="gameTitle">Game</h2>
-    <div id="gameContent"></div>
-    <br>
-    <button onclick="closeGame()">← BACK TO GAMES</button>
-</section>
-
-<!-- ACHIEVEMENTS -->
-
-<section class="dashboard" id="achievements">
-    <h2 class="section-title">🏅 Achievements</h2>
-
-    <div class="badges">
-
-        <div class="badge-card" id="badge-first">
-            <div class="emoji">🎮</div>
-            <h3>First Game</h3>
-            <small>Play your first game</small>
-        </div>
-
-        <div class="badge-card" id="badge-brain">
-            <div class="emoji">🧠</div>
-            <h3>Brain Master</h3>
-            <small>Complete Memory Match</small>
-        </div>
-
-        <div class="badge-card" id="badge-quiz">
-            <div class="emoji">🎯</div>
-            <h3>Quiz Champion</h3>
-            <small>Score 5/5 in the quiz</small>
-        </div>
-
-        <div class="badge-card" id="badge-rich">
-            <div class="emoji">💰</div>
-            <h3>Coin Collector</h3>
-            <small>Collect 100 coins</small>
-        </div>
-
-        <div class="badge-card" id="badge-pro">
-            <div class="emoji">👑</div>
-            <h3>Arcade Legend</h3>
-            <small>Reach level 5</small>
-        </div>
-
-        <div class="badge-card" id="badge-fast">
-            <div class="emoji">⚡</div>
-            <h3>Speed Demon</h3>
-            <small>React in under 300 ms</small>
-        </div>
-
-    </div>
-</section>
-
-<!-- LEADERBOARD -->
-
-<section class="leaderboard" id="leaderboard">
-    <h2 class="section-title">🏆 Leaderboard</h2>
-    <div id="leaderboardList"></div>
-    <p style="color:#999;font-size:12px;margin-top:15px">
-        Local leaderboard: scores are stored in this browser.
-    </p>
-</section>
-
-<footer>
-    © 2026 AFTERHOURS | PLAY. COMPETE. REPEAT. ✨
-</footer>
-
-<div id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 
-// PLAYER DATA
+/* PLAYER DATA */
 
-let player = JSON.parse(localStorage.getItem("afterhoursPlayer")) || {
+let player = JSON.parse(localStorage.getItem("afterhours_player")) || {
     name: "Player",
     xp: 0,
     coins: 0,
@@ -250,400 +681,488 @@ let player = JSON.parse(localStorage.getItem("afterhoursPlayer")) || {
     fastReactions: 0
 };
 
-let leaderboard = JSON.parse(
-    localStorage.getItem("afterhoursLeaderboard")
-) || [];
+let leaderboard = JSON.parse(localStorage.getItem("afterhours_leaderboard")) || [];
 
 function saveData() {
-    localStorage.setItem("afterhoursPlayer", JSON.stringify(player));
-    localStorage.setItem("afterhoursLeaderboard", JSON.stringify(leaderboard));
+    localStorage.setItem("afterhours_player", JSON.stringify(player));
+    localStorage.setItem("afterhours_leaderboard", JSON.stringify(leaderboard));
 }
 
-function updateDashboard() {
-    let level = Math.floor(player.xp / 100) + 1;
-    let progress = player.xp % 100;
+/* USERNAME */
 
-    document.getElementById("playerName").textContent = player.name;
-    document.getElementById("xp").textContent = player.xp;
-    document.getElementById("coins").textContent = player.coins;
-    document.getElementById("level").textContent = level;
-
-    document.getElementById("progressBar").style.width = progress + "%";
-
-    document.getElementById("progressText").textContent =
-        progress + " / 100 XP to next level";
-
-    document.querySelectorAll(".badge-card").forEach(card => {
-        card.classList.remove("unlocked");
-    });
-
-    player.achievements.forEach(id => {
-        let badge = document.getElementById("badge-" + id);
-        if (badge) badge.classList.add("unlocked");
-    });
-
-    renderLeaderboard();
-}
-
-function changeName() {
-    let name = document.getElementById("nameInput").value.trim();
+function enterArcade() {
+    const input = document.getElementById("welcomeName");
+    const name = input.value.trim();
 
     if (!name) {
-        showToast("Please enter a username!");
+        document.getElementById("welcomeError").textContent =
+            "Please enter a username.";
         return;
     }
 
     player.name = name;
-    document.getElementById("nameInput").value = "";
+    saveData();
+
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("arcadeApp").style.display = "block";
+
+    updateDashboard();
+}
+
+document.getElementById("welcomeName").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") enterArcade();
+});
+
+function changeName() {
+    const oldName = player.name;
+    const newName = prompt("Enter your new username:", oldName);
+
+    if (!newName || !newName.trim()) return;
+
+    player.name = newName.trim().slice(0, 18);
+
+    const entry = leaderboard.find(item => item.name === oldName);
+    if (entry) entry.name = player.name;
 
     saveData();
     updateDashboard();
-    showToast("Username updated!");
 }
 
-function showToast(message) {
-    let toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.style.display = "block";
+/* DASHBOARD */
 
-    clearTimeout(window.toastTimer);
+function updateDashboard() {
+    const level = Math.floor(player.xp / 100) + 1;
+    const progress = player.xp % 100;
 
-    window.toastTimer = setTimeout(() => {
-        toast.style.display = "none";
-    }, 2500);
+    document.getElementById("greeting").textContent =
+        "Welcome back, " + player.name + ".";
+
+    document.getElementById("headerName").textContent = player.name;
+    document.getElementById("xpValue").textContent = player.xp;
+    document.getElementById("coinValue").textContent = player.coins;
+    document.getElementById("levelValue").textContent = level;
+    document.getElementById("gamesValue").textContent = player.games;
+    document.getElementById("levelProgress").style.width = progress + "%";
+
+    renderAchievements();
+    renderLeaderboard();
 }
 
-// XP AND COINS
+function reward(xp, coins) {
+    const oldLevel = Math.floor(player.xp / 100) + 1;
 
-function reward(xpAmount, coinAmount) {
-    let oldLevel = Math.floor(player.xp / 100) + 1;
-
-    player.xp += xpAmount;
-    player.coins += coinAmount;
+    player.xp += xp;
+    player.coins += coins;
     player.games++;
 
-    checkAchievements();
-
-    let newLevel = Math.floor(player.xp / 100) + 1;
+    const newLevel = Math.floor(player.xp / 100) + 1;
 
     if (newLevel > oldLevel) {
-        showToast("🎉 LEVEL UP! You reached level " + newLevel);
+        showToast("Level up! You reached level " + newLevel);
     } else {
-        showToast("+" + xpAmount + " XP  |  +" + coinAmount + " coins!");
+        showToast("+" + xp + " XP and +" + coins + " coins");
     }
 
+    checkAchievements();
     saveData();
     updateDashboard();
 }
 
 function unlock(id) {
-    if (!player.achievements.includes(id)) {
-        player.achievements.push(id);
-        showToast("🏅 Achievement unlocked!");
-    }
+    if (player.achievements.includes(id)) return;
+
+    player.achievements.push(id);
+    showToast("Achievement unlocked: " + id);
+    saveData();
 }
+
+/* ACHIEVEMENTS */
+
+const achievements = [
+    { id: "First Steps", description: "Play your first game." },
+    { id: "Getting Started", description: "Play 5 games." },
+    { id: "Regular Player", description: "Play 10 games." },
+    { id: "Memory Master", description: "Win Memory Match." },
+    { id: "Quick Thinker", description: "Get a perfect quiz." },
+    { id: "Fast Reflexes", description: "React in under 300 ms." }
+];
 
 function checkAchievements() {
-    if (player.games >= 1) unlock("first");
-    if (player.memoryWins >= 1) unlock("brain");
-    if (player.perfectQuizzes >= 1) unlock("quiz");
-    if (player.coins >= 100) unlock("rich");
-    if (player.xp >= 400) unlock("pro");
-    if (player.fastReactions >= 1) unlock("fast");
+    if (player.games >= 1) unlock("First Steps");
+    if (player.games >= 5) unlock("Getting Started");
+    if (player.games >= 10) unlock("Regular Player");
+    if (player.memoryWins >= 1) unlock("Memory Master");
+    if (player.perfectQuizzes >= 1) unlock("Quick Thinker");
+    if (player.fastReactions >= 1) unlock("Fast Reflexes");
 }
 
-// LEADERBOARD
+function renderAchievements() {
+    const container = document.getElementById("achievementList");
+
+    container.innerHTML = "";
+
+    achievements.forEach(item => {
+        const earned = player.achievements.includes(item.id);
+
+        container.innerHTML += `
+            <div class="achievement">
+                <div>
+                    <strong>${item.id}</strong><br>
+                    <small>${item.description}</small>
+                </div>
+                <small>${earned ? "UNLOCKED" : "LOCKED"}</small>
+            </div>
+        `;
+    });
+}
+
+/* LEADERBOARD */
 
 function renderLeaderboard() {
-    let list = document.getElementById("leaderboardList");
+    const container = document.getElementById("leaderboard");
 
     let entries = [...leaderboard];
+    const current = entries.find(item => item.name === player.name);
 
-    let existing = entries.find(p => p.name === player.name);
-
-    if (existing) {
-        existing.xp = player.xp;
+    if (current) {
+        current.xp = player.xp;
     } else {
-        entries.push({
-            name: player.name,
-            xp: player.xp
-        });
+        entries.push({ name: player.name, xp: player.xp });
     }
 
-    entries.sort((a,b) => b.xp - a.xp);
+    entries.sort((a, b) => b.xp - a.xp);
 
-    list.innerHTML = "";
+    leaderboard = entries.slice(0, 10);
+    saveData();
 
-    entries.slice(0,10).forEach((p,index) => {
-        let row = document.createElement("div");
-        row.className = "leader-row";
+    container.innerHTML = "";
 
-        let name = document.createElement("span");
-        name.textContent = ["🥇","🥈","🥉"][index] || "#" + (index+1);
-        name.textContent += " " + p.name;
-
-        let score = document.createElement("strong");
-        score.textContent = p.xp + " XP";
-
-        row.appendChild(name);
-        row.appendChild(score);
-
-        list.appendChild(row);
+    leaderboard.forEach((item, index) => {
+        container.innerHTML += `
+            <div class="leader-row">
+                <span>${index + 1}. ${escapeHTML(item.name)}</span>
+                <strong>${item.xp} XP</strong>
+            </div>
+        `;
     });
-
-    leaderboard = entries.slice(0,50);
-    localStorage.setItem("afterhoursLeaderboard",JSON.stringify(leaderboard));
 }
 
-// GAME SYSTEM
-
-const area = document.getElementById("playArea");
-const title = document.getElementById("gameTitle");
-const content = document.getElementById("gameContent");
-
-function openGame(name) {
-    area.style.display = "block";
-    title.textContent = name;
-    content.innerHTML = "";
-    area.scrollIntoView({behavior:"smooth"});
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[character]);
 }
 
-let reactionTimer;
-let reactionReady = false;
-let reactionWaiting = false;
-let reactionStart;
+/* TOAST */
+
+let toastTimer;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+/* GAME MODAL */
+
+function openGame(game) {
+    document.getElementById("gameModal").style.display = "flex";
+
+    if (game === "reaction") startReactionGame();
+    if (game === "memory") startMemoryGame();
+    if (game === "number") startNumberGame();
+    if (game === "quiz") startQuizGame();
+}
 
 function closeGame() {
+    document.getElementById("gameModal").style.display = "none";
+
     clearTimeout(reactionTimer);
-    reactionReady = false;
-    reactionWaiting = false;
-    area.style.display = "none";
+    clearTimeout(memoryTimer);
 }
 
-// REACTION RUSH
+document.getElementById("gameModal").addEventListener("click", function(e) {
+    if (e.target === this) closeGame();
+});
 
-function startReaction() {
-    openGame("⚡ Reaction Rush");
+function setGame(title, info, content) {
+    document.getElementById("gameTitle").textContent = title;
+    document.getElementById("gameInfo").textContent = info;
+    document.getElementById("gameArea").innerHTML = content;
+}
 
-    content.innerHTML = `
-        <p>Click when the box turns GREEN!</p>
-        <div id="reaction">Press START to begin</div>
-        <button onclick="beginReaction()">START</button>
-        <p id="reactionResult"></p>
-    `;
+/* GAME 1: REACTION RUSH */
+
+let reactionTimer;
+let reactionStart = 0;
+let reactionState = "idle";
+
+function startReactionGame() {
+    clearTimeout(reactionTimer);
+    reactionState = "idle";
+
+    setGame(
+        "Reaction Rush",
+        "Click the box when it turns green. Do not click before that.",
+        `<div class="reaction-box" id="reactionBox" onclick="reactionClick()">
+            Press START when you are ready.
+         </div>
+         <button class="primary-btn" onclick="beginReaction()">START</button>
+         <p class="game-message" id="reactionMessage"></p>`
+    );
 }
 
 function beginReaction() {
+    if (reactionState === "waiting") return;
+
     clearTimeout(reactionTimer);
 
-    reactionReady = false;
-    reactionWaiting = true;
+    reactionState = "waiting";
 
-    let box = document.getElementById("reaction");
-    let result = document.getElementById("reactionResult");
+    const box = document.getElementById("reactionBox");
+    const message = document.getElementById("reactionMessage");
 
-    box.classList.remove("ready");
-    box.textContent = "WAIT FOR GREEN...";
-    result.textContent = "";
+    box.style.background = "#f5e9e8";
+    box.textContent = "Wait for green...";
+    message.textContent = "";
+
+    const delay = Math.random() * 3000 + 1500;
 
     reactionTimer = setTimeout(() => {
-        reactionReady = true;
+        if (reactionState !== "waiting") return;
+
+        reactionState = "ready";
         reactionStart = performance.now();
 
-        box.classList.add("ready");
-        box.textContent = "CLICK NOW!";
-    },1500 + Math.random()*3000);
-
-    box.onclick = () => {
-        if (reactionReady) {
-            let time = Math.round(performance.now()-reactionStart);
-
-            reactionReady = false;
-            reactionWaiting = false;
-
-            box.textContent = "NICE!";
-            result.textContent = "Reaction time: " + time + " ms";
-
-            reward(20,10);
-
-            if (time < 300) {
-                player.fastReactions++;
-                checkAchievements();
-                saveData();
-                updateDashboard();
-            }
-
-        } else if (reactionWaiting) {
-            clearTimeout(reactionTimer);
-            reactionWaiting = false;
-            box.textContent = "TOO EARLY!";
-            result.textContent = "Wait for green next time!";
-        }
-    };
+        box.style.background = "#dcefe2";
+        box.textContent = "CLICK NOW";
+    }, delay);
 }
 
-// MEMORY MATCH
+function reactionClick() {
+    const box = document.getElementById("reactionBox");
+    const message = document.getElementById("reactionMessage");
 
-let memoryValues = [];
-let flipped = [];
-let matched = [];
-let memoryLocked = false;
-
-function startMemory() {
-    openGame("🧠 Memory Match");
-
-    memoryValues = [
-        "🍕","🍕","🚀","🚀",
-        "🐱","🐱","⚽","⚽",
-        "🎮","🎮","🍩","🍩",
-        "🌈","🌈","🔥","🔥"
-    ].sort(() => Math.random()-0.5);
-
-    flipped = [];
-    matched = [];
-    memoryLocked = false;
-
-    content.innerHTML = `
-        <p>Find all 8 matching pairs!</p>
-        <div id="memoryBoard"></div>
-        <p id="memoryResult">Good luck!</p>
-    `;
-
-    let board = document.getElementById("memoryBoard");
-
-    memoryValues.forEach((emoji,index) => {
-        let button = document.createElement("button");
-        button.className = "memory-card";
-        button.textContent = "?";
-        button.onclick = () => flipCard(index,button);
-        board.appendChild(button);
-    });
-}
-
-function flipCard(index,button) {
-    if (
-        memoryLocked ||
-        matched.includes(index) ||
-        flipped.some(item => item.index === index)
-    ) return;
-
-    button.textContent = memoryValues[index];
-    flipped.push({index,button});
-
-    if (flipped.length === 2) {
-        memoryLocked = true;
-
-        if (memoryValues[flipped[0].index] ===
-            memoryValues[flipped[1].index]) {
-
-            flipped.forEach(item => matched.push(item.index));
-
-            flipped = [];
-            memoryLocked = false;
-
-            if (matched.length === 16) {
-                document.getElementById("memoryResult").textContent =
-                    "🎉 YOU WON! ALL PAIRS MATCHED!";
-
-                player.memoryWins++;
-                reward(40,25);
-            }
-
-        } else {
-            setTimeout(() => {
-                flipped.forEach(item => item.button.textContent = "?");
-                flipped = [];
-                memoryLocked = false;
-            },800);
-        }
-    }
-}
-
-// NUMBER NINJA
-
-let secretNumber;
-let attempts;
-let guessFinished = false;
-
-function startGuess() {
-    openGame("🔢 Number Ninja");
-
-    secretNumber = Math.floor(Math.random()*100)+1;
-    attempts = 0;
-    guessFinished = false;
-
-    content.innerHTML = `
-        <p>Guess a number between 1 and 100.</p>
-        <input id="guessInput" type="number" min="1" max="100" placeholder="Guess">
-        <button onclick="checkGuess()">GUESS</button>
-        <p id="guessResult">Can you find the number?</p>
-        <button onclick="startGuess()">RESTART</button>
-    `;
-
-    document.getElementById("guessInput").addEventListener("keydown",e => {
-        if(e.key === "Enter") checkGuess();
-    });
-}
-
-function checkGuess() {
-    if (guessFinished) return;
-
-    let input = document.getElementById("guessInput");
-    let result = document.getElementById("guessResult");
-    let guess = Number(input.value);
-
-    if (!Number.isInteger(guess)||guess<1||guess>100) {
-        result.textContent = "Enter a number between 1 and 100!";
+    if (reactionState === "waiting") {
+        clearTimeout(reactionTimer);
+        reactionState = "idle";
+        box.style.background = "#f5e9e8";
+        box.textContent = "Too early. Try again.";
+        message.textContent = "Wait until the box turns green.";
         return;
     }
 
-    attempts++;
+    if (reactionState === "ready") {
+        const time = Math.round(performance.now() - reactionStart);
+
+        reactionState = "finished";
+        box.style.background = "#e9f4ed";
+        box.textContent = time + " ms";
+
+        message.textContent = time < 300
+            ? "Excellent reaction time!"
+            : "Good attempt. Try to get faster.";
+
+        if (time < 300) player.fastReactions++;
+
+        reward(20, 10);
+    }
+}
+
+/* GAME 2: MEMORY MATCH */
+
+let memoryValues = [];
+let flippedCards = [];
+let matchedCards = [];
+let memoryMoves = 0;
+let memoryTimer;
+let memoryCompleted = false;
+
+function startMemoryGame() {
+    clearTimeout(memoryTimer);
+
+    memoryValues = ["A","A","B","B","C","C","D","D",
+                    "E","E","F","F","G","G","H","H"]
+                    .sort(() => Math.random() - 0.5);
+
+    flippedCards = [];
+    matchedCards = [];
+    memoryMoves = 0;
+    memoryCompleted = false;
+
+    setGame(
+        "Memory Match",
+        "Find all eight matching pairs.",
+        `<p>Moves: <strong id="memoryMoves">0</strong></p>
+         <div class="memory-grid" id="memoryGrid"></div>
+         <p class="game-message" id="memoryMessage"></p>
+         <button class="small-btn" onclick="startMemoryGame()">RESTART</button>`
+    );
+
+    renderMemory();
+}
+
+function renderMemory() {
+    const grid = document.getElementById("memoryGrid");
+
+    grid.innerHTML = "";
+
+    memoryValues.forEach((value, index) => {
+        const button = document.createElement("button");
+
+        button.className = "memory-card";
+
+        if (matchedCards.includes(index)) {
+            button.classList.add("matched");
+            button.textContent = value;
+        } else if (flippedCards.includes(index)) {
+            button.classList.add("flipped");
+            button.textContent = value;
+        } else {
+            button.textContent = "?";
+        }
+
+        button.onclick = () => flipMemoryCard(index);
+
+        grid.appendChild(button);
+    });
+}
+
+function flipMemoryCard(index) {
+    if (memoryCompleted ||
+        flippedCards.includes(index) ||
+        matchedCards.includes(index) ||
+        flippedCards.length === 2) return;
+
+    flippedCards.push(index);
+    renderMemory();
+
+    if (flippedCards.length === 2) {
+        memoryMoves++;
+        document.getElementById("memoryMoves").textContent = memoryMoves;
+
+        const [first, second] = flippedCards;
+
+        if (memoryValues[first] === memoryValues[second]) {
+            matchedCards.push(first, second);
+            flippedCards = [];
+            renderMemory();
+
+            if (matchedCards.length === 16) {
+                memoryCompleted = true;
+                player.memoryWins++;
+                document.getElementById("memoryMessage").textContent =
+                    "You matched every pair!";
+
+                reward(40, 20);
+            }
+        } else {
+            memoryTimer = setTimeout(() => {
+                flippedCards = [];
+                renderMemory();
+            }, 800);
+        }
+    }
+}
+
+/* GAME 3: NUMBER NINJA */
+
+let secretNumber;
+let numberAttempts;
+let numberFinished;
+
+function startNumberGame() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    numberAttempts = 0;
+    numberFinished = false;
+
+    setGame(
+        "Number Ninja",
+        "Guess the hidden number between 1 and 100.",
+        `<input id="numberGuess" type="number" min="1" max="100"
+            placeholder="Enter your guess">
+         <button class="primary-btn" onclick="checkNumber()">GUESS</button>
+         <p class="game-message" id="numberMessage"></p>
+         <p id="numberAttempts">Attempts: 0</p>
+         <button class="small-btn" onclick="startNumberGame()">NEW GAME</button>`
+    );
+
+    document.getElementById("numberGuess").addEventListener("keydown", e => {
+        if (e.key === "Enter") checkNumber();
+    });
+}
+
+function checkNumber() {
+    if (numberFinished) return;
+
+    const input = document.getElementById("numberGuess");
+    const guess = Number(input.value);
+    const message = document.getElementById("numberMessage");
+
+    if (!Number.isInteger(guess) || guess < 1 || guess > 100) {
+        message.textContent = "Enter a whole number between 1 and 100.";
+        return;
+    }
+
+    numberAttempts++;
+
+    document.getElementById("numberAttempts").textContent =
+        "Attempts: " + numberAttempts;
 
     if (guess === secretNumber) {
-        guessFinished = true;
+        numberFinished = true;
 
-        result.textContent =
-            "🎉 CORRECT! You won in " + attempts + " attempts!";
+        message.textContent =
+            "Correct! You found it in " + numberAttempts + " attempts.";
 
-        reward(30,15);
-
+        reward(30, 15);
     } else if (guess < secretNumber) {
-        result.textContent = "📈 Too low! Try higher.";
+        message.textContent = "Too low. Try a higher number.";
     } else {
-        result.textContent = "📉 Too high! Try lower.";
+        message.textContent = "Too high. Try a lower number.";
     }
 
     input.value = "";
-    input.focus();
 }
 
-// QUICK QUIZ
+/* GAME 4: QUICK QUIZ */
 
 const questions = [
     {
-        q:"Which planet is known as the Red Planet?",
-        options:["Venus","Mars","Jupiter","Saturn"],
-        answer:1
+        question: "Which planet is known as the Red Planet?",
+        options: ["Venus", "Mars", "Jupiter", "Saturn"],
+        answer: "Mars"
     },
     {
-        q:"How many sides does a hexagon have?",
-        options:["5","6","7","8"],
-        answer:1
+        question: "What is the chemical symbol for gold?",
+        options: ["Ag", "Go", "Au", "Gd"],
+        answer: "Au"
     },
     {
-        q:"Which language is used to style websites?",
-        options:["HTML","Python","CSS","C++"],
-        answer:2
+        question: "How many sides does a hexagon have?",
+        options: ["Five", "Six", "Seven", "Eight"],
+        answer: "Six"
     },
     {
-        q:"What is the largest ocean?",
-        options:["Atlantic","Indian","Arctic","Pacific"],
-        answer:3
+        question: "Which language is used to style web pages?",
+        options: ["HTML", "Python", "CSS", "SQL"],
+        answer: "CSS"
     },
     {
-        q:"What is the chemical symbol for gold?",
-        options:["Ag","Au","Fe","Go"],
-        answer:1
+        question: "What is the largest ocean on Earth?",
+        options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+        answer: "Pacific"
     }
 ];
 
@@ -651,64 +1170,77 @@ let quizIndex = 0;
 let quizScore = 0;
 let quizFinished = false;
 
-function startQuiz() {
-    openGame("🎯 Quick Quiz");
+function startQuizGame() {
     quizIndex = 0;
     quizScore = 0;
     quizFinished = false;
+
     showQuestion();
 }
 
 function showQuestion() {
     if (quizIndex >= questions.length) {
-        quizFinished = true;
-
-        content.innerHTML = `
-            <h2>🎉 QUIZ COMPLETE!</h2>
-            <p>Your score: ${quizScore}/5</p>
-            <button onclick="startQuiz()">PLAY AGAIN</button>
-        `;
-
-        reward(quizScore*10,quizScore*5);
-
-        if (quizScore === 5) {
-            player.perfectQuizzes++;
-            checkAchievements();
-            saveData();
-            updateDashboard();
-        }
-
+        finishQuiz();
         return;
     }
 
-    let q = questions[quizIndex];
+    const q = questions[quizIndex];
 
-    content.innerHTML = `
-        <p>Question ${quizIndex+1} of 5</p>
-        <h3>${q.q}</h3>
-    `;
+    let optionsHTML = q.options.map(option => `
+        <button class="quiz-option"
+            onclick="answerQuiz('${option}')">${option}</button>
+    `).join("");
 
-    q.options.forEach((option,index) => {
-        let button = document.createElement("button");
-        button.className = "quiz-option";
-        button.textContent = option;
-
-        button.onclick = () => {
-            if (quizFinished) return;
-
-            if(index === q.answer) quizScore++;
-
-            quizIndex++;
-            showQuestion();
-        };
-
-        content.appendChild(button);
-    });
+    setGame(
+        "Quick Quiz",
+        "Question " + (quizIndex + 1) + " of " + questions.length,
+        `<h3>${q.question}</h3>
+         <div style="margin-top:18px">${optionsHTML}</div>
+         <p class="game-message" id="quizMessage"></p>`
+    );
 }
 
-// INITIALIZE
+function answerQuiz(answer) {
+    if (quizFinished) return;
 
-updateDashboard();
+    if (answer === questions[quizIndex].answer) {
+        quizScore++;
+    }
+
+    quizIndex++;
+    showQuestion();
+}
+
+function finishQuiz() {
+    if (quizFinished) return;
+
+    quizFinished = true;
+
+    if (quizScore === questions.length) {
+        player.perfectQuizzes++;
+    }
+
+    setGame(
+        "Quiz Complete",
+        "You finished all five questions.",
+        `<h3 style="font-size:36px">${quizScore}/5</h3>
+         <p style="margin:12px 0">Your final score</p>
+         <p class="game-message">${
+            quizScore === 5 ? "Perfect score!" : "Good effort. Try again!"
+         }</p>
+         <button class="primary-btn" onclick="startQuizGame()">PLAY AGAIN</button>`
+    );
+
+    reward(quizScore * 10, quizScore * 5);
+}
+
+/* INITIALIZE */
+
+document.getElementById("welcomeName").value =
+    player.name === "Player" ? "" : player.name;
+
+checkAchievements();
+saveData();
 
 </script>
 
