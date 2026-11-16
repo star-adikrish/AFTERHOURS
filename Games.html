@@ -7,16 +7,14 @@
 <title>AFTERHOURS — Play Something</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
-
 :root {
-    --bg: #f4f5f7;
-    --card: #ffffff;
-    --text: #20242c;
-    --muted: #78808e;
-    --green: #286b46;
-    --green-light: #e9f4ed;
-    --border: #e5e7eb;
+    --bg: #eeece4;
+    --card: #fbfaf5;
+    --text: #292a25;
+    --muted: #77766d;
+    --green: #596347;
+    --green-light: #e8e8dc;
+    --border: #d9d5ca;
 }
 
 * {
@@ -28,7 +26,7 @@
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
 }
 
@@ -52,7 +50,7 @@ button {
 .welcome-card {
     width: 100%;
     max-width: 460px;
-    background: white;
+    background: var(--card);
     padding: 42px;
     border: 1px solid var(--border);
     border-radius: 18px;
@@ -60,9 +58,9 @@ button {
 }
 
 .brand {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-weight: 700;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.8px;
     font-size: 30px;
 }
 
@@ -71,7 +69,7 @@ button {
 }
 
 .welcome-card h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 29px;
     margin: 35px 0 10px;
 }
@@ -105,7 +103,7 @@ button {
 }
 
 .primary-btn:hover {
-    background: #1f5739;
+    background: #48513a;
     transform: translateY(-1px);
 }
 
@@ -127,7 +125,7 @@ button {
 }
 
 header {
-    background: white;
+    background: var(--card);
     border-bottom: 1px solid var(--border);
     padding: 17px 6%;
     display: flex;
@@ -137,7 +135,7 @@ header {
 }
 
 .header-brand {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-weight: 700;
     font-size: 24px;
     letter-spacing: -1px;
@@ -178,9 +176,9 @@ header {
 }
 
 .welcome-heading h1 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(27px, 4vw, 38px);
-    letter-spacing: -1.5px;
+    letter-spacing: -0.5px;
 }
 
 .welcome-heading p {
@@ -196,7 +194,7 @@ header {
 }
 
 .stat-card {
-    background: white;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 20px;
@@ -211,7 +209,7 @@ header {
 }
 
 .stat-card h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 29px;
     margin-top: 9px;
 }
@@ -239,7 +237,7 @@ header {
 }
 
 .section-heading h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 23px;
 }
 
@@ -255,16 +253,24 @@ header {
 }
 
 .game-card {
-    background: white;
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 13px;
+    border-radius: 10px 15px 11px 8px;
     padding: 25px;
     transition: transform .2s, border-color .2s;
 }
 
 .game-card:hover {
     transform: translateY(-3px);
-    border-color: #b7cbbd;
+    border-color: #b9b6a8;
+}
+
+.game-card:nth-child(2) {
+    border-radius: 15px 9px 13px 10px;
+}
+
+.game-card:nth-child(3) {
+    border-radius: 9px 13px 10px 15px;
 }
 
 .game-number {
@@ -275,7 +281,7 @@ header {
 }
 
 .game-card h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 21px;
     margin: 12px 0 7px;
 }
@@ -299,14 +305,14 @@ header {
 }
 
 .panel {
-    background: white;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 13px;
     padding: 23px;
 }
 
 .panel h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 20px;
     margin-bottom: 17px;
 }
@@ -353,7 +359,7 @@ header {
 }
 
 .modal-content {
-    background: white;
+    background: var(--card);
     width: 100%;
     max-width: 500px;
     border-radius: 15px;
@@ -375,7 +381,7 @@ header {
 }
 
 .modal-content h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 25px;
     margin-bottom: 9px;
     padding-right: 35px;
@@ -419,7 +425,7 @@ header {
 }
 
 .reaction-box {
-    background: #f1f3f2;
+    background: #eeece4;
     border-radius: 12px;
     min-height: 190px;
     display: flex;
@@ -462,14 +468,14 @@ header {
     display: block;
     width: 100%;
     padding: 13px;
-    background: #f2f4f3;
+    background: #f1efe8;
     border-radius: 8px;
     margin: 8px 0;
     text-align: left;
 }
 
 .quiz-option:hover {
-    background: var(--green-light);
+    background: #e5e6da;
 }
 
 footer {
@@ -541,13 +547,13 @@ footer {
 <section class="welcome-screen" id="welcomeScreen">
     <div class="welcome-card">
         <div class="brand">AFTER<span>HOURS</span></div>
-        <h2>BORED? NOT ANYMORE.</h2>
-        <p class="subtitle">Your personal arcade. Play games, earn rewards and beat your high scores.</p>
+        <h2>Got a minute?</h2>
+        <p class="subtitle">A few little games for when you need a break.</p>
 
         <input id="welcomeName" type="text" maxlength="18"
             placeholder="Choose a username">
 
-        <button class="primary-btn" onclick="enterArcade()">ENTER ARCADE</button>
+        <button class="primary-btn" onclick="enterArcade()">Let's play</button>
         <p class="error" id="welcomeError"></p>
     </div>
 </section>
@@ -560,7 +566,7 @@ footer {
     <div class="header-brand">AFTER<span>HOURS</span></div>
     <div class="header-right">
         <span class="profile-name" id="headerName">Player</span>
-        <button class="small-btn" onclick="changeName()">EDIT NAME</button>
+        <button class="small-btn" onclick="changeName()">Change name</button>
     </div>
 </header>
 
@@ -568,7 +574,7 @@ footer {
 
     <div class="welcome-heading">
         <h1 id="greeting">Welcome back.</h1>
-        <p>Your next high score is waiting.</p>
+        <p>Pick something. See how it goes.</p>
     </div>
 
     <section class="stats">
@@ -598,37 +604,37 @@ footer {
 
     <div class="section-heading">
         <h2>Choose your game</h2>
-        <p>Four ways to play.</p>
+        <p>Pick one</p>
     </div>
 
     <section class="games-grid">
 
         <div class="game-card">
-            <span class="game-number">GAME 01</span>
+            <span class="game-number">No. 1</span>
             <h3>Reaction Rush</h3>
-            <p>Test your reflexes. Wait for the signal and react as quickly as possible.</p>
-            <button class="primary-btn" onclick="openGame('reaction')">PLAY NOW</button>
+            <p>Wait for the green, then tap. Try not to jump the gun.</p>
+            <button class="primary-btn" onclick="openGame('reaction')">Play</button>
         </div>
 
         <div class="game-card">
-            <span class="game-number">GAME 02</span>
+            <span class="game-number">No. 2</span>
             <h3>Memory Match</h3>
-            <p>Remember the positions and match all the pairs in the fewest moves.</p>
-            <button class="primary-btn" onclick="openGame('memory')">PLAY NOW</button>
+            <p>Flip a few cards and see if you can keep track of them.</p>
+            <button class="primary-btn" onclick="openGame('memory')">Play</button>
         </div>
 
         <div class="game-card">
-            <span class="game-number">GAME 03</span>
+            <span class="game-number">No. 3</span>
             <h3>Number Ninja</h3>
-            <p>Find the hidden number between 1 and 100. Can you guess it?</p>
-            <button class="primary-btn" onclick="openGame('number')">PLAY NOW</button>
+            <p>There's a number hiding between 1 and 100. Take a guess.</p>
+            <button class="primary-btn" onclick="openGame('number')">Play</button>
         </div>
 
         <div class="game-card">
-            <span class="game-number">GAME 04</span>
+            <span class="game-number">No. 4</span>
             <h3>Quick Quiz</h3>
-            <p>Five questions. One attempt. See how much you really know.</p>
-            <button class="primary-btn" onclick="openGame('quiz')">PLAY NOW</button>
+            <p>Five questions. Let's see what you remember.</p>
+            <button class="primary-btn" onclick="openGame('quiz')">Play</button>
         </div>
 
     </section>
@@ -649,7 +655,7 @@ footer {
 
 </main>
 
-<footer>AFTERHOURS — Made for the love of playing.</footer>
+<footer>AFTERHOURS · Made after hours</footer>
 
 </div>
 
@@ -945,7 +951,7 @@ function beginReaction() {
         reactionState = "ready";
         reactionStart = performance.now();
 
-        box.style.background = "#dcefe2";
+        box.style.background = "#e8e8dc";
         box.textContent = "CLICK NOW";
     }, delay);
 }
@@ -967,7 +973,7 @@ function reactionClick() {
         const time = Math.round(performance.now() - reactionStart);
 
         reactionState = "finished";
-        box.style.background = "#e9f4ed";
+        box.style.background = "#e8e8dc";
         box.textContent = time + " ms";
 
         message.textContent = time < 300
