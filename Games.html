@@ -8,13 +8,16 @@
 
 <style>
 :root {
-    --bg: #eeece4;
-    --card: #fbfaf5;
-    --text: #292a25;
-    --muted: #77766d;
-    --green: #596347;
-    --green-light: #e8e8dc;
-    --border: #d9d5ca;
+    --sky: #87ceeb;
+    --card: #ffffff;
+    --text: #292929;
+    --muted: #666666;
+    --green: #3c963c;
+    --green-light: #e6e6e6;
+    --red: #d23b32;
+    --yellow: #f4ca44;
+    --blue: #4b79b9;
+    --border: #999999;
 }
 
 * {
@@ -24,9 +27,9 @@
 }
 
 body {
-    background: var(--bg);
+    background-color: var(--sky);
     color: var(--text);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
 }
 
@@ -45,66 +48,67 @@ button {
     align-items: center;
     justify-content: center;
     padding: 24px;
+    background: linear-gradient(to bottom, transparent 90%, #4b9b37 90% 93%, #95613c 93%);
 }
 
 .welcome-card {
     width: 100%;
-    max-width: 460px;
+    max-width: 420px;
     background: var(--card);
-    padding: 42px;
-    border: 1px solid var(--border);
-    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid #555;
+    border-radius: 3px;
     text-align: center;
 }
 
 .brand {
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 700;
-    letter-spacing: -0.8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0;
     font-size: 30px;
 }
 
 .brand span {
-    color: var(--green);
+    color: #c33;
 }
 
 .welcome-card h2 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 29px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
     margin: 35px 0 10px;
 }
 
 .subtitle {
     color: var(--muted);
-    line-height: 1.6;
-    font-size: 14px;
+    line-height: 1.5;
+    font-size: 15px;
 }
 
 .welcome-card input {
     width: 100%;
     padding: 14px;
     margin: 25px 0 12px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
+    border: 1px solid #777;
+    border-radius: 3px;
     outline: none;
+    background: white;
 }
 
 .welcome-card input:focus {
-    border-color: var(--green);
+    border-color: var(--blue);
 }
 
 .primary-btn {
-    background: var(--green);
-    color: white;
-    padding: 13px 20px;
-    border-radius: 9px;
-    font-weight: 700;
-    transition: background .2s, transform .2s;
+    background: #4a7bb8;
+    color: #ffffff;
+    padding: 10px 16px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 .primary-btn:hover {
-    background: #48513a;
-    transform: translateY(-1px);
+    background: #365f91;
 }
 
 .welcome-card .primary-btn {
@@ -112,7 +116,7 @@ button {
 }
 
 .error {
-    color: #c0392b;
+    color: #a01512;
     font-size: 13px;
     margin-top: 10px;
     min-height: 18px;
@@ -122,11 +126,14 @@ button {
 
 #arcadeApp {
     display: none;
+    min-height: 100vh;
+    background:
+        linear-gradient(to bottom, #87ceeb 0 78%, #4b9b37 78% 82%, #95613c 82%);
 }
 
 header {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
+    background: #ffffff;
+    border-bottom: 1px solid #777;
     padding: 17px 6%;
     display: flex;
     justify-content: space-between;
@@ -135,14 +142,14 @@ header {
 }
 
 .header-brand {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 24px;
-    letter-spacing: -1px;
+    letter-spacing: 0;
 }
 
 .header-brand span {
-    color: var(--green);
+    color: #c33;
 }
 
 .header-right {
@@ -157,10 +164,11 @@ header {
 }
 
 .small-btn {
-    background: var(--green-light);
-    color: var(--green);
+    background: #eeeeee;
+    color: var(--text);
     padding: 9px 13px;
-    border-radius: 7px;
+    border: 1px solid #777;
+    border-radius: 3px;
     font-size: 12px;
     font-weight: 700;
 }
@@ -169,20 +177,22 @@ header {
     width: 90%;
     max-width: 1150px;
     margin: 35px auto;
+    background: transparent;
 }
 
 .welcome-heading {
     margin-bottom: 28px;
+    color: #222;
 }
 
 .welcome-heading h1 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: clamp(27px, 4vw, 38px);
     letter-spacing: -0.5px;
 }
 
 .welcome-heading p {
-    color: var(--muted);
+    color: #333;
     margin-top: 7px;
 }
 
@@ -195,29 +205,28 @@ header {
 
 .stat-card {
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    border: 1px solid #777;
+    border-radius: 3px;
     padding: 20px;
 }
 
 .stat-card p {
     font-size: 12px;
     color: var(--muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .5px;
+    font-weight: bold;
 }
 
 .stat-card h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 29px;
     margin-top: 9px;
 }
 
 .progress-track {
-    background: #edf0ed;
-    height: 7px;
-    border-radius: 20px;
+    background: #d6cfad;
+    height: 9px;
+    border: 1px solid var(--border);
+    border-radius: 0;
     margin-top: 12px;
     overflow: hidden;
 }
@@ -226,7 +235,6 @@ header {
     background: var(--green);
     height: 100%;
     width: 0%;
-    transition: width .3s;
 }
 
 .section-heading {
@@ -234,15 +242,16 @@ header {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
+    color: #222;
 }
 
 .section-heading h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 23px;
 }
 
 .section-heading p {
-    color: var(--muted);
+    color: #333;
     font-size: 13px;
 }
 
@@ -254,34 +263,24 @@ header {
 
 .game-card {
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px 15px 11px 8px;
-    padding: 25px;
-    transition: transform .2s, border-color .2s;
+    border: 1px solid #777;
+    border-radius: 3px;
+    padding: 20px;
 }
 
 .game-card:hover {
-    transform: translateY(-3px);
-    border-color: #b9b6a8;
-}
-
-.game-card:nth-child(2) {
-    border-radius: 15px 9px 13px 10px;
-}
-
-.game-card:nth-child(3) {
-    border-radius: 9px 13px 10px 15px;
+    border-color: #333;
 }
 
 .game-number {
     font-size: 12px;
-    color: var(--green);
+    color: #c33;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .game-card h3 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 21px;
     margin: 12px 0 7px;
 }
@@ -306,13 +305,13 @@ header {
 
 .panel {
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 13px;
-    padding: 23px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    padding: 20px;
 }
 
 .panel h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     margin-bottom: 17px;
 }
@@ -350,7 +349,7 @@ header {
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(25, 30, 28, .45);
+    background: rgba(41, 41, 41, .72);
     display: none;
     align-items: center;
     justify-content: center;
@@ -362,7 +361,8 @@ header {
     background: var(--card);
     width: 100%;
     max-width: 500px;
-    border-radius: 15px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
     padding: 28px;
     position: relative;
     max-height: 90vh;
@@ -373,15 +373,17 @@ header {
     position: absolute;
     right: 20px;
     top: 17px;
-    background: #f0f1f2;
-    width: 31px;
-    height: 31px;
-    border-radius: 50%;
-    font-weight: 700;
+    background: var(--red);
+    color: white;
+    border: 1px solid #777777;
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 .modal-content h2 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
     margin-bottom: 9px;
     padding-right: 35px;
@@ -401,7 +403,7 @@ header {
 
 .game-area input {
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 3px;
     padding: 12px;
     width: 100%;
     margin: 12px 0;
@@ -425,8 +427,9 @@ header {
 }
 
 .reaction-box {
-    background: #eeece4;
-    border-radius: 12px;
+    background: #b6ddff;
+    border: 1px solid var(--border);
+    border-radius: 3px;
     min-height: 190px;
     display: flex;
     align-items: center;
@@ -446,9 +449,10 @@ header {
 }
 
 .memory-card {
-    background: #edf1ee;
+    background: var(--blue);
     color: var(--text);
-    border-radius: 9px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
     height: 65px;
     font-size: 22px;
     font-weight: 700;
@@ -468,19 +472,20 @@ header {
     display: block;
     width: 100%;
     padding: 13px;
-    background: #f1efe8;
-    border-radius: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 3px;
     margin: 8px 0;
     text-align: left;
 }
 
 .quiz-option:hover {
-    background: #e5e6da;
+    background: var(--yellow);
 }
 
 footer {
     text-align: center;
-    color: var(--muted);
+    color: #222;
     font-size: 12px;
     padding: 30px 15px;
 }
@@ -492,18 +497,15 @@ footer {
     background: #20242c;
     color: white;
     padding: 14px 20px;
-    border-radius: 9px;
+    border-radius: 3px;
     font-size: 13px;
     opacity: 0;
-    transform: translateY(10px);
-    transition: .25s;
     pointer-events: none;
     z-index: 20;
 }
 
 .toast.show {
     opacity: 1;
-    transform: translateY(0);
 }
 
 @media(max-width: 750px) {
@@ -547,8 +549,8 @@ footer {
 <section class="welcome-screen" id="welcomeScreen">
     <div class="welcome-card">
         <div class="brand">AFTER<span>HOURS</span></div>
-        <h2>Got a minute?</h2>
-        <p class="subtitle">A few little games for when you need a break.</p>
+        <h2>LOCK IN for games</h2>
+        <p class="subtitle">A few little games</p>
 
         <input id="welcomeName" type="text" maxlength="18"
             placeholder="Choose a username">
@@ -573,7 +575,7 @@ footer {
 <main class="container">
 
     <div class="welcome-heading">
-        <h1 id="greeting">Welcome back.</h1>
+        <h1 id="greeting">Welcome back LOCK IN.</h1>
         <p>Pick something. See how it goes.</p>
     </div>
 
